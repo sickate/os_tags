@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:tag].nil?
+      @users = User.all
+    else
+      @users = User.tagged_with params[:tag]
+    end
   end
 
   # GET /users/1
@@ -69,6 +73,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :description, :avatar)
+      params.require(:user).permit(:name, :email, :description, :avatar, :tag_list, :group_id)
     end
 end

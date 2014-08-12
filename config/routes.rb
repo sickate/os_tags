@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  resources :groups
+
+  get 'home/index'
+  get 'tags', to: 'home#tags'
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
+
+  get 'tags/:tag', to: 'users#index', as: :tag
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

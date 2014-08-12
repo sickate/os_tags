@@ -1,0 +1,10 @@
+%h1 Tags
+.container
+  #wordcloud{:style => "width: 600px; height: 371px;"}
+
+:javascript
+  $(function() {
+    // When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
+    var word_array = JSON.parse('#{@tag_array.to_json}');
+    $("#wordcloud").jQCloud(word_array);
+  });

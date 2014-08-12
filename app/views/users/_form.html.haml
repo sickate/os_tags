@@ -1,0 +1,33 @@
+.container
+  = form_for(@user, :html => {:class => 'form-horizontal'} ) do |f|
+    - if @user.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@user.errors.count, "error")
+          prohibited this user from being saved:
+        %ul
+          - @user.errors.full_messages.each do |message|
+            %li= message
+    .field.form-group
+      %label.col-sm-3.control-label Pick your user name
+      .col-sm-9
+        = f.text_field :name, :class => 'form-control'
+    .field.form-group
+      %label.col-sm-3.control-label Enter Opera Email
+      .col-sm-9
+        = f.text_field :email, :class => 'form-control'
+    .field.form-group
+      %label.col-sm-3.control-label Describe yourself
+      .col-sm-9
+        = f.text_area :description, :class => 'form-control'
+    .field.form-group
+      %label.col-sm-3.control-label Tags (seperated by commas)
+      .col-sm-9
+        = f.text_field :tag_list, :class => 'form-control'
+    .field.form-group
+      %label.col-sm-3.control-label Group
+      .col-sm-9
+        = f.collection_select :group_id, Group.all, :id, :name, {}, :class => 'form-control'
+    .actions.form-group
+      .col-sm-offset-3.col-sm-9
+        = f.submit 'Sign Up!', :class => 'btn btn-default'
