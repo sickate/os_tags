@@ -47,15 +47,15 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-  before :publishing, :create_tmp_directory
+  #before :publishing, :create_tmp_directory
 
-  desc 'create tmp directory in rails4'
-  task :create_tmp_directory do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :mkdir, release_path.join('tmp')
-    end
-  end
+  #desc 'create tmp directory in rails4'
+  #task :create_tmp_directory do
+    #on roles(:app), in: :sequence, wait: 5 do
+      ## Your restart mechanism here, for example:
+      #execute :mkdir, release_path.join('tmp')
+    #end
+  #end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
