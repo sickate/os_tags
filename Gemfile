@@ -41,3 +41,9 @@ gem 'acts-as-taggable-on'
 
 gem 'haml'
 gem 'erb2haml'
+
+# Deploy with Capistrano
+gem 'capistrano', '~> 3.2.0'
+gem 'passenger'
+#gem 'rvm-capistrano'
+
