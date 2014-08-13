@@ -4,6 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
+# Load RVM's capistrano plugin.
+#require 'bundler/capistrano'
+
 role :app, %w{106.187.42.176}
 role :web, %w{106.187.42.176}
 role :db,  %w{106.187.42.176}
@@ -25,12 +28,15 @@ server '106.187.42.176', user: 'sickcate', roles: %w{web app}, my_property: :my_
 namespace :deploy do
 
   desc 'Start application'
-  task :restart do
+  task :start do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      run "cd #{current_path} && bundle exec passenger start #{current_path} -e #{rails_env} -p 80 -d --log-file #{File.join(current_path,'log','passenger.log')} --pid-file #{File.join(current_path,'tmp','pids','passenger.pid')}"
+      execute :touch, release_path.join('/tmp/restart.txt')
     end
   end
+
+  #after :restart, "deploy:migrate"
+
 
 end
 # Custom SSH Options

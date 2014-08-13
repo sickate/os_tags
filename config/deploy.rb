@@ -34,17 +34,28 @@ set :deploy_to, '/var/www/os_tags'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :rvm_type, :user
+
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      execute :touch, release_path.join('restart.txt')
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
   after :publishing, :restart
+  before :publishing, :create_tmp_directory
+
+  desc 'create tmp directory in rails4'
+  task :create_tmp_directory do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :mkdir, release_path.join('tmp')
+    end
+  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
