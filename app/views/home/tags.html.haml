@@ -1,6 +1,10 @@
-%h1 Tags
-.container
-  #wordcloud{:style => "width: 600px; height: 371px;"}
+.row
+  -##wordcloud{:style => "width: 600px; height: 371px;"}
+  .col-sm-12
+
+    %h1.bs-docs-featurette-title Tags
+    .row
+      #wordcloud{:style => "height: 400px;"}
 
 :javascript
   $(function() {

@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jqcloud-1.0.4
 //= require bootstrap-sprockets

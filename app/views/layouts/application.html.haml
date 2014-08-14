@@ -5,6 +5,8 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
   %body{"data-twttr-rendered" => "true"}
     %a.sr-only.sr-only-focusable{:href => "#content"} Skip to main content
     %header#top.navbar.navbar-static-top.bs-docs-nav{:role => "banner"}
@@ -32,7 +34,9 @@
                 Home
             -#%li
               -#%a{:href => "http://blog.getbootstrap.com", :onclick => "ga('send', 'event', 'Navbar', 'Community links', 'Blog');"} Blog
+    %main.bs-docs
     .container.bs-docs-container
       .row
-        .col-md-9{:role => "main"}
+        = yield
+        -#.col-md-9{:role => "main"}
           = yield
