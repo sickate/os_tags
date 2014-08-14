@@ -1,5 +1,9 @@
-%h1 Editing group
-= render 'form'
-= link_to 'Show', @group
-|
-\#{link_to 'Back', groups_path}
+%h3.bs-docs-featurette-title Edit Group
+%hr
+.row
+  .col-sm-12
+
+    = render 'form'
+    = link_to 'Show', @group
+    |
+    \#{link_to 'Back', groups_path}

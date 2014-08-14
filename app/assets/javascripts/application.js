@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require jqcloud-1.0.4
 //= require bootstrap
+
