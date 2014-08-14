@@ -30,8 +30,6 @@ GEM
     acts-as-taggable-on (3.3.0)
       activerecord (>= 3, < 5)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (2.2.0.20140804)
-      execjs
     bootstrap-sass (3.2.0.1)
       sass (~> 3.2)
     builder (3.2.2)
@@ -61,6 +59,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.2.1)
+    font-awesome-sass (4.1.0)
+      sass (~> 3.2)
     haml (4.1.0.beta.1)
       tilt
     hike (1.2.3)
@@ -159,13 +159,13 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  autoprefixer-rails
   bootstrap-sass (~> 3.2.0)
   capistrano (~> 3.2.0)
   capistrano-rails (~> 1.1)
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   erb2haml
+  font-awesome-sass (~> 4.1.0)
   haml
   jbuilder (~> 2.0)
   jquery-rails

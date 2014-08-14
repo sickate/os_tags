@@ -38,7 +38,8 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
+# Font Awesome
+gem 'font-awesome-sass', '~> 4.1.0'
 
 gem 'acts-as-taggable-on'
 
@@ -49,6 +50,6 @@ gem 'erb2haml'
 gem 'capistrano', '~> 3.2.0'
 gem 'passenger'
 gem 'capistrano-rvm'
-gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'
 
