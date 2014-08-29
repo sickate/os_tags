@@ -1,22 +1,36 @@
-%p#notice= notice
-%p
-  %strong Name:
-  = @user.name
-%p
-  %strong Email:
-  = @user.email
-%p
-  %strong Description:
-  = @user.description
-%p
-  %strong Group:
-  = @user.group.name
--#%p
-  -#%strong Avatar:
--#  = @user.avatar
-%p
-  %strong Tags:
-  = @user.tag_list.join(', ')
-= link_to 'Edit', edit_user_path(@user)
-|
-\#{link_to 'Back', users_path}
+.page-header
+  %h3 User Information
+.row
+  .col-sm-12
+    %p#notice= notice
+    %p
+      %strong Name:
+      = @user.name
+    %p
+      %strong Email:
+      = @user.email
+    %p
+      %strong Description:
+      = @user.description
+    %p
+      %strong Group:
+      = @user.group.name
+    -#%p
+      -#%strong Avatar:
+    -#  = @user.avatar
+    %p
+      %strong Clients:
+      = @user.client_list.join(', ')
+    %p
+      %strong Skills:
+      = @user.skill_list.join(', ')
+    %p
+      %strong Prospects:
+      = @user.prospect_list.join(', ')
+    %p
+      %strong Tags:
+      = @user.tag_list.join(', ')
+
+    = link_to 'Edit', edit_user_path(@user)
+    |
+    \#{link_to 'Back', users_path}

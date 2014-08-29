@@ -8,30 +8,52 @@
         %ul
           - @user.errors.full_messages.each do |message|
             %li= message
-    .field.form-group
-      %label.col-sm-3.control-label Pick your user name
-      .col-sm-9
-        = f.text_field :name, :class => 'form-control'
-    .field.form-group
-      %label.col-sm-3.control-label Enter Opera Email
-      .col-sm-9
-        = f.text_field :email, :class => 'form-control'
-    .field.form-group
-      %label.col-sm-3.control-label Describe yourself
-      .col-sm-9
-        = f.text_area :description, :class => 'form-control'
-    -#.field.form-group
-      -#%label.col-sm-3.control-label Skills (seperated by commas)
-      -#.col-sm-9
-    -#    = f.text_field :skill_list, :class => 'form-control'
-    .field.form-group
-      %label.col-sm-3.control-label Tags (seperated by commas)
-      .col-sm-9
-        = f.text_field :tag_list, :class => 'form-control'
-    .field.form-group
-      %label.col-sm-3.control-label Group
-      .col-sm-9
-        = f.collection_select :group_id, Group.all, :id, :name, {}, :class => 'form-control'
+    %fieldset
+      %legend Basic Information
+      .field.form-group
+        %label.col-sm-3.control-label Pick your user name
+        .col-sm-9
+          = f.text_field :name, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Enter Opera Email
+        .col-sm-9
+          = f.text_field :email, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Group
+        .col-sm-9
+          = f.collection_select :group_id, Group.all, :id, :name, {}, :class => 'form-control'
+
+    %fieldset
+      %legend Input your tags
+      .field.form-group
+        %label.col-sm-3.control-label Clients (seperated by commas)
+        .col-sm-9
+          = f.text_field :client_list, :class => 'form-control'
+        .col-sm-offset-3.col-sm-9
+          = "Existing Clients: #{User.client_counts.join(',')}"
+      .field.form-group
+        %label.col-sm-3.control-label Prospects (seperated by commas)
+        .col-sm-9
+          = f.text_field :skill_list, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Skills (seperated by commas)
+        .col-sm-9
+          = f.text_field :prospect_list, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Other Tags (seperated by commas)
+        .col-sm-9
+          = f.text_field :tag_list, :class => 'form-control'
+
+    %fieldset
+      %legend Tell us more about yourself
+      .field.form-group
+        %label.col-sm-3.control-label Describe yourself
+        .col-sm-9
+          = f.text_area :description, :class => 'form-control'
+
     .actions.form-group
       .col-sm-offset-3.col-sm-9
-        = f.submit 'Sign Up!', :class => 'btn btn-default'
+        - if params[:action] == 'new'
+          = f.submit 'Sign Up!', :class => 'btn btn-default'
+        - else
+          = f.submit 'Save Changes', :class => 'btn btn-default'

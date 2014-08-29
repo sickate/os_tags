@@ -8,39 +8,40 @@
     %meta{:charset =>"utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-  %body{"data-twttr-rendered" => "true"}
+  %body
     %a.sr-only.sr-only-focusable{:href => "#content"} Skip to main content
-    %header#top.navbar.navbar-static-top.bs-docs-nav{:role => "banner"}
+    #top.navbar.navbar-default.navbar-fixed-top{:role => "banner"}
       .container
         .navbar-header
-          %button.navbar-toggle.collapsed{"data-target" => ".bs-navbar-collapse", "data-toggle" => "collapse", :type => "button", :style => "color: #ffffff;"}
-            %span.sr-only Toggle navigation
-            -#%span.fa.fa-chevron-down
-            = icon('th-list')
-            -#%span.icon-bar
-            -#%span.icon-bar
-            -#%span.icon-bar
-          %a.navbar-brand{:href => "/"} OperaTags
-        %nav.navbar-collapse.bs-navbar-collapse.collapse{:role => "navigation", :style => "height: 1px;"}
+          %a.navbar-brand{:href => "/"}
+            = icon('home')
+            OperaTags
+          %button.navbar-toggle.collapsed{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        %nav.navbar-collapse.collapse#navbar-main{:role => "navigation"}
           %ul.nav.navbar-nav
             %li
-              %a{:href => "/users"} Users
+              %a{:href => "/users"}
+                = icon('user')
+                Users
             %li
-              %a{:href => "/groups"} Groups
+              %a{:href => "/groups"}
+                = icon('group')
+                Groups
+          = form_tag users_path, method: 'get', class: 'navbar-form navbar-left' do
+            = text_field_tag :search, params[:search], class: 'form-control col-lg-8', placeholder: 'Search by name'
+          -#%form.navbar-form.navbar-left
+            -#%input.form-control.col-lg-8{:placeholder => "Search By Name", :type => "text"}
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{:href => "/tags", :style => "color: #ffffff;"}
-                -#%span.glyphicon.glyphicon-home
-                = icon('home')
-                Home
-            -#%li
-              -#%a{:href => "http://blog.getbootstrap.com", :onclick => "ga('send', 'event', 'Navbar', 'Community links', 'Blog');"} Blog
+              %a{:href => "/tags"}
+                = icon('tags')
+                Tags
     %main
-      %br
       .container
         = yield
-        -#.col-md-9{:role => "main"}
-          = yield
 :javascript
   $(document).ready(function(){
     $('nav li').removeClass('active');

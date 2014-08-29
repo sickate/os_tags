@@ -1,20 +1,72 @@
-%h3.bs-docs-featurette-title Tag Cloud
-%br
+.page-header
+  %h3 Tag Cloud
 .row
-  .col-sm-12
-    .well
-      %h4{:style => "color: #515151;"} Tap tags for details
-      #tagcloud{:style => "height: 400px;"}
-  -#.col-sm-4
-    -#.well
-      -##bucloud{:style => "height: 400px;"}
-  -#.col-sm-4
-    -#.well
-  -#    #totalcloud{:style => "height: 400px;"}
+  .col-lg-12
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#all"} All Tags
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          Categories
+          %span.caret
+        %ul.dropdown-menu
+          %li
+            %a{"data-toggle" => "tab", :href => "#skills"} Skills
+          %li.divider
+          %li
+            %a{"data-toggle" => "tab", :href => "#clients"} Clients
+          %li.divider
+          %li
+            %a{"data-toggle" => "tab", :href => "#prospects"} Prospects
+
+    #myTabContent.tab-content
+      #all.tab-pane.fade.active.in
+        %br
+        .well
+          %h4{:style => "color: #515151;"} Tap tags for details
+          #tagcloud{:style => "height: 400px;"}
+
+      #skills.tab-pane.fade
+        %br
+        .well
+          %h4{:style => "color: #515151;"} Tap tags for details
+          #skillcloud{:style => "height: 400px;"}
+      #clients.tab-pane.fade
+        %br
+        .well
+          %h4{:style => "color: #515151;"} Tap tags for details
+          #clientcloud{:style => "height: 400px;"}
+      #prospects.tab-pane.fade
+        %br
+        .well
+          %h4{:style => "color: #515151;"} Tap tags for details
+          #prospectcloud{:style => "height: 400px;"}
 
 :javascript
   $(function() {
     // When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
     var tag_array = JSON.parse('#{@tag_array.to_json}');
+    var client_array = JSON.parse('#{@client_array.to_json}');
+    var skill_array = JSON.parse('#{@skill_array.to_json}');
+    var prospect_array = JSON.parse('#{@prospect_array.to_json}');
+
     $("#tagcloud").jQCloud(tag_array);
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(evt, ui) {
+      $($(evt.target).attr('href')).find('[id$="cloud"]').width('inherit');
+      if (($(evt.target).attr('href')) == '#skills') {
+        $("#skillcloud").empty();
+        $($(evt.target).attr('href')).find('[id$="cloud"]').jQCloud(skill_array);
+      } else if(($(evt.target).attr('href')) == '#clients') {
+        $("#clientcloud").empty();
+        $($(evt.target).attr('href')).find('[id$="cloud"]').jQCloud(client_array);
+      } else if(($(evt.target).attr('href')) == '#prospects') {
+        $("#prospectcloud").empty();
+        $($(evt.target).attr('href')).find('[id$="cloud"]').jQCloud(prospect_array);
+      } else {
+        $("#tagcloud").empty();
+        $("#tagcloud").jQCloud(tag_array);
+      }
+
+    });
   });
