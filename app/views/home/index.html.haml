@@ -1,2 +1,25 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.erb
+%h3.bs-docs-featurette-title Total Users: #{User.all.size}.
+%p.lead Bootstrap makes front-end web development faster and easier. It's made for folks of all skill levels, devices of all shapes, and projects of all sizes.
+%hr.half-rule/
+.row
+  .col-sm-4
+    %img.img-responsive{:alt => "Sass and Less support", :src => "assets/img/sass-less.png"}/
+    %h3 Preprocessors
+    %p
+      Bootstrap ships with vanilla CSS, but its source code utilizes the two most popular CSS preprocessors,
+      %a{:href => "../css/#less"} Less
+      and
+      = succeed "." do
+        %a{:href => "../css/#sass"} Sass
+      Quickly get started with precompiled CSS or build on the source.
+  .col-sm-4
+    %img.img-responsive{:alt => "Responsive across devices", :src => "assets/img/devices.png"}/
+    %h3 One framework, every device.
+    %p Bootstrap easily and efficiently scales your websites and applications with a single code base, from phones to tablets to desktops with CSS media queries.
+  .col-sm-4
+    %img.img-responsive{:alt => "Components", :src => "assets/img/components.png"}/
+    %h3 Full of features
+    %p With Bootstrap, you get extensive and beautiful documentation for common HTML elements, dozens of custom HTML and CSS components, and awesome jQuery plugins.
+%hr.half-rule/
+%p.lead Bootstrap is open source. It's hosted, developed, and maintained on GitHub.
+%a.btn.btn-outline.btn-lg{:href => "https://github.com/twbs/bootstrap"} View the GitHub project

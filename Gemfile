@@ -52,6 +52,6 @@ gem 'erb2haml'
 gem 'capistrano', '~> 3.2.0'
 gem 'passenger'
 gem 'capistrano-rvm'
-gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'
 

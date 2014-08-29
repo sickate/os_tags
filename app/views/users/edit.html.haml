@@ -1,5 +1,8 @@
-%h1 Editing user
-= render 'form'
-= link_to 'Show', @user
-|
-\#{link_to 'Back', users_path}
+%h3.bs-docs-featurette-title Editing User
+%hr
+.row
+  .col-sm-12
+    = render 'form'
+    = link_to 'Show', @user
+    |
+    \#{link_to 'Back', users_path}
