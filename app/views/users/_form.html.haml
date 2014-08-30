@@ -32,11 +32,11 @@
         .col-sm-offset-3.col-sm-9
           = "Existing Clients: #{User.client_counts.join(',')}"
       .field.form-group
-        %label.col-sm-3.control-label Prospects (seperated by commas)
+        %label.col-sm-3.control-label Skills (seperated by commas)
         .col-sm-9
           = f.text_field :skill_list, :class => 'form-control'
       .field.form-group
-        %label.col-sm-3.control-label Skills (seperated by commas)
+        %label.col-sm-3.control-label Prospects (seperated by commas)
         .col-sm-9
           = f.text_field :prospect_list, :class => 'form-control'
       .field.form-group
