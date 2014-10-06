@@ -23,13 +23,26 @@
         %nav.navbar-collapse.collapse#navbar-main{:role => "navigation"}
           %ul.nav.navbar-nav
             %li
-              %a{:href => "/users"}
-                = icon('user')
-                Users
-            %li
               %a{:href => "/groups"}
                 = icon('group')
-                Groups
+                Business Unit
+            %li
+              %a{:href => "/projects"}
+                = icon('suitcase')
+                Projects
+            %li
+              %a{:href => "/users"}
+                = icon('user')
+                People
+
+            -#%li
+              -#%a{:href => "/users"}
+                -#= icon('user')
+                -#Users
+            -#%li
+              -#%a{:href => "/groups"}
+                -#= icon('group')
+            -#    Groups
           = form_tag users_path, method: 'get', class: 'navbar-form navbar-left' do
             = text_field_tag :search, params[:search], class: 'form-control col-lg-8', placeholder: 'Search by name'
           -#%form.navbar-form.navbar-left
