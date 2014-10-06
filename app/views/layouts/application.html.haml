@@ -56,7 +56,10 @@
       .container
         = yield
 :javascript
-  $(document).ready(function(){
+  var setActiveTab = function(){
     $('nav li').removeClass('active');
-    $("nav li:contains('#{params[:controller].capitalize}')").addClass('active');
-  });
+    $("nav li:contains(" + window.location.href.split("/")[3] + ")").addClass('active');
+    //$("nav li:contains('#{params[:controller].capitalize}')").addClass('active');
+  }
+
+  $(document).on('page:load', setActiveTab);

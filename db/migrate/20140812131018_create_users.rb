@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :description
       t.string :avatar
       t.integer :group_id
+      t.integer :project_id
 
       t.timestamps
     end

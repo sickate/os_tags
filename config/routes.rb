@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :countries
+
+  resources :cities
+
+  resources :offices
+
+  resources :projects
+
   resources :groups
 
   get 'home/index'
