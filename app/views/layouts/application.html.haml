@@ -54,7 +54,13 @@
                 Tags
     %main
       .container
-        = yield
+        .row
+          .col-md-3
+            %h4 Filters
+            = render :partial => "#{params[:controller]}/sidebar"
+          .col-md-9
+            %h4 Results
+            = yield
 :javascript
   var setActiveTab = function(){
     $('nav li').removeClass('active');

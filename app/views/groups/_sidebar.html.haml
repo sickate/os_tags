@@ -1,0 +1,23 @@
+%li.list-group-item
+  Business Unit
+  .btn-toolbar
+    .btn-group{"data-model" => 'group'}
+      %button.btn.btn-default.sidebar-btn#selected #{@group.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @groups.each do |item|
+          %li
+            %a #{item.name}
+%li.list-group-item
+  Office
+  .btn-toolbar
+    .btn-group{"data-model" => 'office'}
+      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @offices.each do |item|
+          %li
+            %a #{item.name}
+

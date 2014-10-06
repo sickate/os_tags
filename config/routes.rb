@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#tags'
+  root 'groups#index'
 
   get 'tags/:tag', to: 'users#index', as: :tag
 
