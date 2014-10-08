@@ -26,7 +26,7 @@ set :deploy_to, '/var/www/os_tags'
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -36,40 +36,53 @@ set :deploy_to, '/var/www/os_tags'
 
 
 # puma settings
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+
+set :puma_rackup, -> { File.join(current_path, 'config.ru') }
+set :puma_state, "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
+set :puma_conf, "#{shared_path}/puma.rb"
+
+set :puma_role, :app
+set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
+set :puma_threads, [0, 16]
+set :puma_workers, 0
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true  # Change to true if using ActiveRecord
+set :puma_preload_app, true
+set :puma_prune_bundler, false
+
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, false  # Change to true if using ActiveRecord
-
 
 set :rvm_type, :user
 
-
+# puma 
+#namespace :puma do
+  #desc "Start the application"
+  #task :start do
+    #run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec puma -t 8:32 -b 'unix://#{shared_path}/sockets/puma.sock' -S #{shared_path}/sockets/puma.state --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma-#{rails_env}.log 2>&1 &", :pty => false
+  #end
+  #after "deploy:start", "puma:start"
+#end
 
 namespace :deploy do
 
   # puma 
+  #desc 'Initial Deploy'
+  #task :initial do
+    #on roles(:app) do
+      #before 'deploy:restart', 'puma:start'
+      #invoke 'deploy'
+    #end
+  #end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
+  #desc 'Restart application'
+  #task :restart do
+    #on roles(:app), in: :sequence, wait: 5 do
+      #invoke 'puma:restart'
+    #end
+  #end
 
   #before :starting,     :check_revision
   #after  :finishing,    :compile_assets
@@ -81,22 +94,37 @@ namespace :deploy do
 
   #desc 'Restart application'
   #task :restart do
-    #on roles(:app), in: :sequence, wait: 5 do
-      ## Your restart mechanism here, for example:
-      #execute :touch, release_path.join('tmp/restart.txt')
-    #end
+  #on roles(:app), in: :sequence, wait: 5 do
+  ## Your restart mechanism here, for example:
+  #execute :touch, release_path.join('tmp/restart.txt')
+  #end
   #end
 
 
   #after :restart, :clear_cache do
-    #on roles(:web), in: :groups, limit: 3, wait: 10 do
-      ## Here we can do anything such as:
-      ## within release_path do
-      ##   execute :rake, 'cache:clear'
-      ## end
-    #end
+  #on roles(:web), in: :groups, limit: 3, wait: 10 do
+  ## Here we can do anything such as:
+  ## within release_path do
+  ##   execute :rake, 'cache:clear'
+  ## end
+  #end
   #end
 
   # both passenger and puma
   after :publishing, :restart
+
+  desc 'reset database, will drop all table and recreate them'
+  task :reset_db do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd #{current_path} && bundle exec rake db:reset RAILS_ENV=#{fetch(:rails_env)}"
+    end
+  end
+
+  desc 'seeding'
+  task :seed do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "cd #{current_path} && bundle exec rake db:seed RAILS_ENV=#{fetch(:rails_env)}"
+    end
+  end
+
 end
