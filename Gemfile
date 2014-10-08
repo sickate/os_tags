@@ -34,6 +34,7 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 # gem 'unicorn'
 gem 'puma'
+#gem 'passenger'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -54,8 +55,8 @@ gem 'erb2haml'
 
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.2.0'
-gem 'passenger'
 gem 'capistrano-rvm'
 gem 'capistrano-puma'
+gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'

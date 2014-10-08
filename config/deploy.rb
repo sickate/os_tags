@@ -34,36 +34,69 @@ set :deploy_to, '/var/www/os_tags'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+
+# puma settings
+set :puma_threads,    [4, 16]
+set :puma_workers,    0
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, false  # Change to true if using ActiveRecord
+
+
 set :rvm_type, :user
 
+
+
 namespace :deploy do
+
+  # puma 
+
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
+  end
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'puma:restart'
     end
   end
 
-  after :publishing, :restart
-  #before :publishing, :create_tmp_directory
+  #before :starting,     :check_revision
+  #after  :finishing,    :compile_assets
+  #after  :finishing,    :cleanup
+  #after  :finishing,    :restart
 
-  #desc 'create tmp directory in rails4'
-  #task :create_tmp_directory do
+
+  # passenger
+
+  #desc 'Restart application'
+  #task :restart do
     #on roles(:app), in: :sequence, wait: 5 do
       ## Your restart mechanism here, for example:
-      #execute :mkdir, release_path.join('tmp')
+      #execute :touch, release_path.join('tmp/restart.txt')
     #end
   #end
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
 
+  #after :restart, :clear_cache do
+    #on roles(:web), in: :groups, limit: 3, wait: 10 do
+      ## Here we can do anything such as:
+      ## within release_path do
+      ##   execute :rake, 'cache:clear'
+      ## end
+    #end
+  #end
+
+  # both passenger and puma
+  after :publishing, :restart
 end
