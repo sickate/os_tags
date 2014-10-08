@@ -33,3 +33,6 @@ test:
 production:
   <<: *default
   database: opera_tags_production
+  host: localhost
+  username: root
+  password: root
