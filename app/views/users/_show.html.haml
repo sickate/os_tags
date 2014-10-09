@@ -1,0 +1,8 @@
+.thumbnail
+  .col-sm-6
+    %img
+  .col-sm-6
+    %h4 Basic Info
+    %p= user.role.name
+    %p= user.office.location
+    %p= "Joined #{user.joined_on}"

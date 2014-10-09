@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
+#  status      :string(255)
 #  description :text
 #  group_id    :integer
 #  created_at  :datetime

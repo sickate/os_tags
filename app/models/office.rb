@@ -18,7 +18,12 @@ class Office < ActiveRecord::Base
 
   belongs_to :city
 
-  def name
+  def self.at_location city_name
+    city = City.find_by_name city_name
+    find_by(city_id: city.id)
+  end
+
+  def location
     self.city.name
   end
 end

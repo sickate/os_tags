@@ -6,7 +6,18 @@ class UsersController < ApplicationController
   def index
     if params[:search].blank?
       if params[:tag].nil?
-        @users = User.all
+        # filter
+        @group = Group.find(params[:group_id])
+        @project = Project.find(params[:project_id])
+        @office = Group.find(params[:office_id])
+        @role = Role.find(params[:role_id])
+
+        @groups = Group.all
+        @projects = Project.all
+        @offices = Office.all
+        @roles = Role.all
+
+        @users = User.of_group(@group).in_office(@office).on_project(@project).of_role(@role)
       else
         @users = User.tagged_with params[:tag]
       end
@@ -18,6 +29,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+
   end
 
   # GET /users/new

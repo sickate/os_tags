@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009075351) do
+ActiveRecord::Schema.define(version: 20141009121619) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20141009075351) do
 
   create_table "countries", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "filters", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "project_id"
+    t.integer  "office_id"
+    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,10 +61,23 @@ ActiveRecord::Schema.define(version: 20141009075351) do
     t.datetime "updated_at"
   end
 
+  create_table "offices_projects", force: true do |t|
+    t.integer "office_id"
+    t.integer "project_id"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "name"
+    t.string   "status"
     t.text     "description"
     t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,10 +107,23 @@ ActiveRecord::Schema.define(version: 20141009075351) do
     t.string   "email"
     t.text     "description"
     t.string   "avatar"
+    t.date     "joind_on"
     t.integer  "group_id"
+    t.integer  "role_id"
+    t.integer  "office_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users_projects_current", force: true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  create_table "users_projects_histroy", force: true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
   end
 
 end

@@ -1,0 +1,63 @@
+%li.list-group-item
+  Business Unit
+  .btn-toolbar
+    .btn-group{"data-model" => 'group'}
+      %button.btn.btn-default.sidebar-btn#selected #{@group.nil? ? 'All' : @group.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @groups.each do |item|
+          %li
+            %a #{item.name}
+        %li.divider
+        %li
+          %a All
+
+%li.list-group-item
+  Project
+  .btn-toolbar
+    .btn-group{"data-model" => 'project'}
+      %button.btn.btn-default.sidebar-btn#selected #{@project.nil? ? 'All' : @project.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @projects.each do |item|
+          %li
+            %a #{item.name}
+        %li.divider
+        %li
+          %a All
+
+%li.list-group-item
+  Office
+  .btn-toolbar
+    .btn-group{"data-model" => 'office'}
+      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @offices.each do |item|
+          %li
+            %a #{item.name}
+        %li.divider
+        %li
+          %a All
+
+%li.list-group-item
+  Role
+  .btn-toolbar
+    .btn-group{"data-model" => 'role'}
+      %button.btn.btn-default.sidebar-btn#selected #{@role.nil? ? 'All' : @role.name}
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+        %span.caret
+      %ul.dropdown-menu
+        - @offices.each do |item|
+          %li
+            %a #{item.name}
+        %li.divider
+        %li
+          %a All
+
+%li.divider
+%li.list-group-item
+  Skills

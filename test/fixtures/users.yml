@@ -7,7 +7,10 @@
 #  email       :string(255)
 #  description :text
 #  avatar      :string(255)
+#  joind_on    :date
 #  group_id    :integer
+#  role_id     :integer
+#  office_id   :integer
 #  project_id  :integer
 #  created_at  :datetime
 #  updated_at  :datetime

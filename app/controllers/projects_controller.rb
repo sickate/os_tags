@@ -10,6 +10,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @skill_array = []
+    @people.skill_counts.each do |skill_count|
+      hash = {:text => tag_count.name, :weight => tag_count.taggings_count, :link => "/tags/#{tag_count.name}"}
+      @skill_array.push hash
+    end
   end
 
   # GET /projects/new
@@ -64,7 +69,16 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
+      @group = Group.find(params[:group_id]) if params[:group_id]
       @project = Project.find(params[:id])
+      @group = @project.group if @group.nil?
+      @office = Office.find(params[:office_id]) if params[:office_id]
+
+      @groups = Group.all
+      @offices = Office.all
+      @projects = Project.all
+
+      @people = @project.people.in_office(@office).of_group(@group)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

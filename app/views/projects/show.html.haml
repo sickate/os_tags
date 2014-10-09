@@ -1,13 +1,17 @@
-%p#notice= notice
-%p
-  %strong Name:
-  = @project.name
-%p
-  %strong Description:
-  = @project.description
-%p
-  %strong Group:
-  = @project.group_id
-= link_to 'Edit', edit_project_path(@project)
-|
-\#{link_to 'Back', projects_path}
+.page-header
+  %h4 People
+  - @people.each do |person|
+    %a{href: "#{user_url(person)}"}
+      = person.name
+
+.page-header
+  %h4 Skills
+  .well
+    %h4{:style => "color: #515151;"} Tap skills for details
+    #skillcloud{:style => "height: 400px;"}
+
+:javascript
+  $(function() {
+    var skill_array = JSON.parse('#{@skill_array.to_json}');
+    $("#skillcloud").jQCloud(skill_array);
+  });

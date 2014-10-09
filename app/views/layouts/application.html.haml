@@ -55,11 +55,14 @@
     %main
       .container
         .row
-          .col-md-3
-            %h4 Filters
-            = render :partial => "#{params[:controller]}/sidebar"
-          .col-md-9
-            %h4 Results
+          - if has_sidebar?
+            .col-md-3
+              %h4 Filters
+              = render :partial => "#{params[:controller]}/sidebar"
+            .col-md-9
+              %h4 Results
+              = yield
+          - else
             = yield
 :javascript
   var setActiveTab = function(){

@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
   end
+
   def tags
     @tag_array = []
     @client_array = []
