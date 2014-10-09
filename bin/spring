@@ -12,6 +12,8 @@ unless defined?(Spring)
     ENV["GEM_HOME"] = ""
     Gem.paths = ENV
 
+    puts '*******************************************************'
+
     gem "spring", match[1]
     require "spring/binstub"
   end

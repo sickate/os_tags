@@ -10,10 +10,18 @@ groups.each do |name|
   Group.create(name: name)
 end
 
+puts 'Groups are created!'
+
 offices = ['New Jersey', 'San Diego', 'Shanghai', 'Delhi', 'London']
 timezones = ['EDT', 'PDT', 'CST', 'IST', 'BST']
 
-offices.each_with_index do |name, index|
+offices.each_with_index do |index, name|
   city = City.create(name: name, timezone: timezones[index])
-  Office.create(city_id: city.id)
+  office = Office.create(city_id: city.id)
 end
+puts 'Offices are created!'
+
+Group.all.each do |g|
+  g.offices << Office.all
+end
+

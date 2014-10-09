@@ -17,4 +17,8 @@ class Office < ActiveRecord::Base
   has_many :people, :class_name => 'User'
 
   belongs_to :city
+
+  def name
+    self.city.name
+  end
 end

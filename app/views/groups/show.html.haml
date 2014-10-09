@@ -13,12 +13,12 @@
           %th Tags
           %th{:colspan => "3"}
       %tbody
-        - @group.users.each do |user|
+        - @group.people.each do |person|
           %tr
-            %td= user.name
-            %td= user.email
-            %td= user.description
-            %td= user.tag_list
+            %td= person.name
+            %td= person.email
+            %td= person.description
+            %td= person.tag_list
 
     = link_to 'Edit', edit_group_path(@group)
     |

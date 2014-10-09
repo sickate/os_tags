@@ -4,14 +4,21 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    #@groups = Group.all
+    #group = params[:group_id] ? Group.find(params[:group_id]) : Group.first
+    group_id = Group.first.id
+    redirect_to action: :show, id: group_id
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    #group_id = params[:id] or params[:group_id]
     @group = Group.find params[:id]
-    @users = @group.users
+    #@group = Group.find group_id
+    @groups = Group.all
+    @offices = @group.offices
+    @people = @group.people
   end
 
   # GET /groups/new

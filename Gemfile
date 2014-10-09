@@ -60,3 +60,9 @@ gem 'capistrano3-puma'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
