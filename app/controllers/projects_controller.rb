@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def show
     @skill_array = []
     @people.skill_counts.each do |skill_count|
-      hash = {:text => tag_count.name, :weight => tag_count.taggings_count, :link => "/tags/#{tag_count.name}"}
+      hash = {:text => skill_count.name, :weight => skill_count.taggings_count, :link => "/tags/#{skill_count.name}"}
       @skill_array.push hash
     end
   end
