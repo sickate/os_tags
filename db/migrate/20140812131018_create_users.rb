@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.text :description
       t.string :avatar
-      t.date :joind_on
+      t.date :joined_on
       t.integer :group_id
       t.integer :role_id
       t.integer :office_id

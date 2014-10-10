@@ -1,8 +1,9 @@
-.thumbnail
-  .col-sm-6
-    %img
-  .col-sm-6
-    %h4 Basic Info
-    %p= user.role.name
-    %p= user.office.location
-    %p= "Joined #{user.joined_on}"
+.thumbnail{style: 'display: inline-block; height: 150px'}
+  %a{href: "#{user_path(person)}"}
+    .col-sm-6
+      = image_tag("/avatars/#{person.avatar}.png", style: 'max-width: 100px; max-height: 100px')
+      %strong= person.role.name
+    .col-sm-6
+      %h4 Basic Info
+      = person.office.location
+      = "Joined #{person.joined_on}"
