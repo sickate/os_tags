@@ -65,6 +65,7 @@ GEM
       execjs
     coffee-script-source (1.7.1)
     colorize (0.7.3)
+    daemon_controller (1.2.0)
     debug_inspector (0.0.2)
     erb2haml (0.1.5)
       html2haml
@@ -101,6 +102,10 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    passenger (4.0.48)
+      daemon_controller (>= 1.2.0)
+      rack
+      rake (>= 0.8.1)
     polyglot (0.3.5)
     puma (2.9.1)
       rack (>= 1.1, < 2.0)
@@ -187,7 +192,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   mysql2
-  puma
+  passenger
   rails (= 4.1.4)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

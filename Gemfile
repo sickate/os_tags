@@ -33,8 +33,8 @@ gem 'spring',        group: :development
 
 # Use unicorn as the app server
 # gem 'unicorn'
-gem 'puma'
-#gem 'passenger'
+#gem 'puma'
+gem 'passenger'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
