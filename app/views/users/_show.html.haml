@@ -2,8 +2,9 @@
   %a{href: "#{user_path(person)}"}
     .col-sm-6
       = image_tag("/avatars/#{person.avatar}.png", style: 'max-width: 100px; max-height: 100px')
-      %strong= person.role.name
+      %strong= person.name
     .col-sm-6
       %h4 Basic Info
+      = person.name
       = person.office.location
       = "Joined #{person.joined_on}"
