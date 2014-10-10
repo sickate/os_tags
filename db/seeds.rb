@@ -51,9 +51,9 @@ spm_role = Role.create(name: 'Senior PM')
 se_role = Role.create(name: 'Software Engineer')
 sm_role = Role.create(name: 'Software Manager')
 
-tom = User.create(name: 'Tom Cat', role_id: sm_role.id, office_id: sd_office.id, email: 'tcat@operasolutions.com', group_id: 1, joined_on: Date.parse('20110903'))
-tuo = User.create(name: 'Tuo Zhu', role_id: se_role.id, office_id: sh_office.id, email: 'tuo.zhu@operasolutions.com', group_id: 1, joined_on: Date.parse('20071003'))
-jerry = User.create(name: 'Jerry Mouse', role_id: spm_role.id, office_id: nj_office.id, email: 'jmouse@operasolutions.com', group_id: 1, joined_on: Date.parse('20130203'))
+tom = User.create(name: 'Tom Cat', avatar: 'tom', role_id: sm_role.id, office_id: sd_office.id, email: 'tcat@operasolutions.com', group_id: 1, joined_on: Date.parse('20110903'))
+tuo = User.create(name: 'Tuo Zhu', avatar: 'tuo', role_id: se_role.id, office_id: sh_office.id, email: 'tuo.zhu@operasolutions.com', group_id: 1, joined_on: Date.parse('20071003'))
+jerry = User.create(name: 'Jerry Mouse', avatar: 'jerry', role_id: spm_role.id, office_id: nj_office.id, email: 'jmouse@operasolutions.com', group_id: 1, joined_on: Date.parse('20130203'))
 
 tom.current_projects << Project.first
 tom.skill_list = ['Python', 'Vektor', 'Pentaho', 'Hadoop']
