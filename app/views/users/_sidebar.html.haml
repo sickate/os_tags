@@ -1,3 +1,10 @@
+:ruby
+  group_param = @group.nil? ? '' : "group_id=#{@group.id}&"
+  project_param = @project.nil? ? '' : "project_id=#{@project.id}&"
+  office_param = @office.nil? ? '' : "office_id=#{@office.id}&"
+  role_param = @role.nil? ? '' : "role_id=#{@role.id}&"
+
+
 %li.list-group-item
   Business Unit
   .btn-toolbar
@@ -58,6 +65,5 @@
         %li
           %a All
 
-%li.divider
+%h4 Skills
 %li.list-group-item
-  Skills

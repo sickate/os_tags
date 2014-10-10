@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    project_id = Project.first.id
+    redirect_to action: :show, id: project_id
   end
 
   # GET /projects/1
@@ -78,7 +80,7 @@ class ProjectsController < ApplicationController
       @offices = Office.all
       @projects = Project.all
 
-      @people = @project.people.in_office(@office).of_group(@group)
+      @people = User.on_project(@project).in_office(@office).of_group(@group)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

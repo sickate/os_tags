@@ -1,26 +1,34 @@
-.page-header
-  %h3 Employees
 .row
-  .col-sm-12
-    %table.table
-      %thead
-        %tr
-          %th Name
-          -#%th Email
-          %th Tags
-          %th Description
-          -#%th Avatar
-          %th{:colspan => "3"}
-      %tbody
-        - @users.each do |user|
-          %tr
-            %td= user.name
-            -#%td= user.email
-            %td= user.tag_list
-            %td= user.description
-            -#%td= user.avatar
-            %td= link_to 'Show', user
-            %td= link_to 'Edit', edit_user_path(user)
-            %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-    %br/
-    = link_to 'New User', new_user_path
+  - @people.each do |person|
+    .col-md-4
+      = render partial: 'show', locals: {person: person}
+
+
+
+-# Old ones
+-#.page-header
+  -#%h3 Employees
+-#.row
+  -#.col-sm-12
+    -#%table.table
+      -#%thead
+        -#%tr
+          -#%th Name
+          -#-#%th Email
+          -#%th Tags
+          -#%th Description
+          -#-#%th Avatar
+          -#%th{:colspan => "3"}
+      -#%tbody
+        -#- @users.each do |user|
+          -#%tr
+            -#%td= user.name
+            -#-#%td= user.email
+            -#%td= user.tag_list
+            -#%td= user.description
+            -#-#%td= user.avatar
+            -#%td= link_to 'Show', user
+            -#%td= link_to 'Edit', edit_user_path(user)
+            -#%td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+    -#%br/
+-#    = link_to 'New User', new_user_path

@@ -8,19 +8,21 @@
       %ul.dropdown-menu
         - @groups.each do |item|
           %li
-            %a #{item.name}
+            - if @office.nil?
+              %a{href: "/groups/#{item.id}"} #{item.name}
+            - else
+              %a{href: "/groups/#{item.id}?office_id=#{@office.id}"} #{item.name}
 %li.list-group-item
   Office
   .btn-toolbar
     .btn-group{"data-model" => 'office'}
-      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.location}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @offices.each do |item|
           %li
-            %a #{item.name}
+            %a{href: "/groups/#{@group.id}?office_id=#{item.id}"} #{item.location}
         %li.divider
         %li
-          %a All
-
+          %a{href: "/groups/#{@group.id}"} All

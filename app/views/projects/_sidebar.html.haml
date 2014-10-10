@@ -1,3 +1,8 @@
+:ruby
+  group_param = @group.nil? ? '' : "group_id=#{@group.id}&"
+  project_param = @project.nil? ? '' : "project_id=#{@project.id}&"
+  office_param = @office.nil? ? '' : "office_id=#{@office.id}&"
+
 %li.list-group-item
   Business Unit
   .btn-toolbar
@@ -8,7 +13,7 @@
       %ul.dropdown-menu
         - @groups.each do |item|
           %li
-            %a #{item.name}
+            %a{href: "/projects/#{@project.id}?group_id=#{item.id}&#{office_param}"} #{item.name}
 %li.list-group-item
   Project
   .btn-toolbar
@@ -19,19 +24,21 @@
       %ul.dropdown-menu
         - @projects.each do |item|
           %li
-            %a #{item.name}
+            %a{href: "/projects/#{item.id}?#{group_param}#{office_param}"} #{item.name}
+
 %li.list-group-item
   Office
   .btn-toolbar
     .btn-group{"data-model" => 'office'}
-      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.location}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @offices.each do |item|
           %li
             %a #{item.name}
+            %a{href: "/projects/#{@project.id}?#{group_param}&office_id=#{item.id}"} #{item.location}
         %li.divider
         %li
-          %a All
+          %a{href: "/projects/#{@project.id}?#{group_param}"} All
 

@@ -18,7 +18,14 @@ class GroupsController < ApplicationController
     #@group = Group.find group_id
     @groups = Group.all
     @offices = @group.offices
-    @people = @group.people
+    @office = Office.find(params[:office_id]) unless params[:office_id].nil?
+
+    @people = User.in_office(@office).of_group(@group)
+    @skill_array = []
+    @people.skill_counts.each do |skill_count|
+      hash = {:text => skill_count.name, :weight => skill_count.taggings_count, :link => "/tags/#{skill_count.name}"}
+      @skill_array.push hash
+    end
   end
 
   # GET /groups/new

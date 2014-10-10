@@ -34,12 +34,28 @@ class User < ActiveRecord::Base
     end
   }
 
+ scope :of_role, -> (role) {
+    if role.nil?
+      all
+    else
+      where(role_id: role.id)
+    end
+  }
+
 
   scope :of_group, -> (group) {
     if group.nil?
       all
     else
       where(group_id: group.id)
+    end
+  }
+
+  scope :on_project, -> (project) {
+    if project.nil?
+      all
+    else
+      joins('left outer join users_projects_current on users_projects_current.user_id = users.id').where('users_projects_current.project_id = ?', project.id)
     end
   }
 

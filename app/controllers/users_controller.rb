@@ -7,10 +7,10 @@ class UsersController < ApplicationController
     if params[:search].blank?
       if params[:tag].nil?
         # filter
-        @group = Group.find(params[:group_id])
-        @project = Project.find(params[:project_id])
-        @office = Group.find(params[:office_id])
-        @role = Role.find(params[:role_id])
+        @group = Group.find(params[:group_id]) unless params[:group_id].nil?
+        @project = Project.find(params[:project_id]) unless params[:project_id].nil?
+        @office = Group.find(params[:office_id]) unless params[:office_id].nil?
+        @role = Role.find(params[:role_id]) unless params[:role_id].nil?
 
         @groups = Group.all
         @projects = Project.all
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     else
         @users = User.search params[:search]
     end
+    @people = @users
   end
 
   # GET /users/1
