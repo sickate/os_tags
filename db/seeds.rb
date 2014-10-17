@@ -5,6 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Group.destroy_all
+Office.destroy_all
+City.destroy_all
+User.destroy_all
+Project.destroy_all
+
 groups = ['Advanced Solutions',  'Health Care']
 groups.each do |name|
   Group.create(name: name)
@@ -51,9 +57,19 @@ spm_role = Role.create(name: 'Senior PM')
 se_role = Role.create(name: 'Software Engineer')
 sm_role = Role.create(name: 'Software Manager')
 
-tom = User.create(name: 'Tom Cat', avatar: 'tom', role_id: sm_role.id, office_id: sd_office.id, email: 'tcat@operasolutions.com', group_id: 1, joined_on: Date.parse('20110903'))
-tuo = User.create(name: 'Tuo Zhu', avatar: 'tuo', role_id: se_role.id, office_id: sh_office.id, email: 'tuo.zhu@operasolutions.com', group_id: 1, joined_on: Date.parse('20071003'))
-jerry = User.create(name: 'Jerry Mouse', avatar: 'jerry', role_id: spm_role.id, office_id: nj_office.id, email: 'jmouse@operasolutions.com', group_id: 1, joined_on: Date.parse('20130203'))
+puts "Start create users ..."
+tom = User.create(name: 'Tom Cat', avatar: 'tom', role_id: sm_role.id, 
+	office_id: sd_office.id, email: 'tcat@operasolutions.com', 
+	password: "123123", password_confirmation: "123123",
+	group_id: 1, joined_on: Date.parse('20110903'))
+tuo = User.create(name: 'Tuo Zhu', avatar: 'tuo', role_id: se_role.id, 
+	office_id: sh_office.id, email: 'tuo.zhu@operasolutions.com', 
+	password: "123123", password_confirmation: "123123",
+	group_id: 1, joined_on: Date.parse('20071003'))
+jerry = User.create(name: 'Jerry Mouse', avatar: 'jerry', role_id: spm_role.id, 
+	office_id: nj_office.id, email: 'jmouse@operasolutions.com', 
+	password: "123123", password_confirmation: "123123",
+	group_id: 1, joined_on: Date.parse('20130203'))
 
 tom.current_projects << Project.first
 tom.skill_list = ['Python', 'Vektor', 'Pentaho', 'Hadoop']
@@ -64,3 +80,4 @@ tuo.skill_list = ['Python', 'Java', 'Ruby', 'Hbase']
 tom.save
 tuo.save
 jerry.save
+puts "#{User.count} Users are created!"

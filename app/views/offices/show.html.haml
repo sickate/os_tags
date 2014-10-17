@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @office.name
+%p
+  %strong City:
+  = @office.city_id
+%p
+  %strong Group:
+  = @office.group_id
+= link_to 'Edit', edit_office_path(@office)
+|
+\#{link_to 'Back', offices_path}

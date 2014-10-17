@@ -61,6 +61,11 @@ gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'
 
+
+gem 'devise'
+gem 'devise-i18n-views'
+gem 'cancancan'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -12,7 +12,7 @@
 
 class Office < ActiveRecord::Base
   has_and_belongs_to_many :projects, :join_table => "offices_projects"
-  has_and_belongs_to_many :groups, :join_table => "groups_projects"
+  has_and_belongs_to_many :groups, :join_table => "groups_offices"
 
   has_many :people, :class_name => 'User'
 

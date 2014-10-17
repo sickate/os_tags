@@ -55,6 +55,8 @@
     %main
       .container
         .row
+          .panel-heading
+            = render partial: "shared/flash_messages", flash: flash 
           - if has_sidebar?
             .col-md-3
               %h4 Filters
