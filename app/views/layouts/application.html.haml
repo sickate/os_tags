@@ -22,15 +22,15 @@
             %span.icon-bar
         %nav.navbar-collapse.collapse#navbar-main{:role => "navigation"}
           %ul.nav.navbar-nav
-            %li
+            %li#groupsTab
               %a{:href => "/groups"}
                 = icon('group')
                 Business Unit
-            %li
+            %li#projectsTab
               %a{:href => "/projects"}
                 = icon('suitcase')
                 Projects
-            %li
+            %li#usersTab
               %a{:href => "/users"}
                 = icon('user')
                 People
@@ -47,11 +47,12 @@
             = text_field_tag :search, params[:search], class: 'form-control col-lg-8', placeholder: 'Search by name'
           -#%form.navbar-form.navbar-left
             -#%input.form-control.col-lg-8{:placeholder => "Search By Name", :type => "text"}
-          %ul.nav.navbar-nav.navbar-right
-            %li
-              %a{:href => "/tags"}
-                = icon('tags')
-                Tags
+          -if user_signed_in?
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                %a{href: "#{destroy_user_session_path}", :'data-method' => 'delete'}
+                  = icon('sign-out')
+                  Logout
     %main
       .container
         .row
@@ -67,10 +68,13 @@
           - else
             = yield
 :javascript
-  var setActiveTab = function(){
-    $('nav li').removeClass('active');
-    $("nav li:contains(" + window.location.href.split("/")[3] + ")").addClass('active');
-    //$("nav li:contains('#{params[:controller].capitalize}')").addClass('active');
-  }
-
-  $(document).on('page:load', setActiveTab);
+  $(document).ready(function(){
+    var setActiveTab = function(){
+      $('nav li').removeClass('active');
+      $("#" + window.location.href.split("/")[3] + 'Tab').addClass('active');
+      //$("nav li:contains('#{params[:controller].capitalize}')").addClass('active');
+    }
+    setActiveTab();
+    $(document).on('page:load', setActiveTab);
+  });
+ 
