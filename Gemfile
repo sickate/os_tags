@@ -56,7 +56,8 @@ gem 'erb2haml'
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.2.0'
 gem 'capistrano-rvm'
-gem 'capistrano3-puma'
+#gem 'capistrano3-puma'
+gem 'capistrano-passenger'
 gem 'capistrano-bundler'
 gem 'capistrano-rails', '~> 1.1', group: :development
 #gem 'rvm-capistrano'
