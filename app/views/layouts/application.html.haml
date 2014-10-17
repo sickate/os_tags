@@ -50,9 +50,14 @@
           -if user_signed_in?
             %ul.nav.navbar-nav.navbar-right
               %li
+                %a{href: "#{edit_user_path(current_user)}"}
+                  = icon('gear')
+                  Settings
+              %li
                 %a{href: "#{destroy_user_session_path}", :'data-method' => 'delete'}
                   = icon('sign-out')
                   Logout
+              
     %main
       .container
         .row

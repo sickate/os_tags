@@ -22,6 +22,15 @@
         %label.col-sm-3.control-label Group
         .col-sm-9
           = f.collection_select :group_id, Group.all, :id, :name, {}, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Office
+        .col-sm-9
+          = f.collection_select :office_id, Office.all, :id, :location, {}, :class => 'form-control'
+      .field.form-group
+        %label.col-sm-3.control-label Join Date
+        .col-sm-9
+          = f.date_field :joined_on, :class => 'form-control'
+
 
     %fieldset
       %legend Input your tags
@@ -29,12 +38,16 @@
         %label.col-sm-3.control-label Clients (seperated by commas)
         .col-sm-9
           = f.text_field :client_list, :class => 'form-control'
-        .col-sm-offset-3.col-sm-9
-          = "Existing Clients: #{User.client_counts.join(',')}"
+
       .field.form-group
         %label.col-sm-3.control-label Skills (seperated by commas)
         .col-sm-9
           = f.text_field :skill_list, :class => 'form-control'
+        .col-sm-offset-3.col-sm-9
+          -#= "Existing Skills: #{User.skill_counts.join(', ')}"
+          Existing Skills: 
+          - User.skill_counts.each do |skill|
+            %a.existingSkillTag{href: '', onclick: 'return false;'}= skill
       .field.form-group
         %label.col-sm-3.control-label Prospects (seperated by commas)
         .col-sm-9
@@ -57,3 +70,17 @@
           = f.submit 'Sign Up!', :class => 'btn btn-default'
         - else
           = f.submit 'Save Changes', :class => 'btn btn-default'
+
+:javascript
+  $(document).ready(function(){
+    $('.existingSkillTag').click(function(evt){
+      var tag = evt.target.text;
+      var existing_tags = $('#user_skill_list').val()=='' ? [] : $('#user_skill_list').val().split(',').map(function(item,index){return item.trim()});;
+      var indexOfTag = existing_tags.indexOf(tag);
+      if ( indexOfTag>= 0)
+        existing_tags.splice(indexOfTag, 1);        
+      else
+        existing_tags.push(tag);
+      $('#user_skill_list').val(existing_tags.join(', '));        
+    })
+  })
