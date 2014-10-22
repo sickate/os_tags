@@ -10,18 +10,18 @@
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
   %body
     %a.sr-only.sr-only-focusable{:href => "#content"} Skip to main content
-    #top.navbar.navbar-default.navbar-fixed-top{:role => "banner"}
+    #top.navbar.navbar-default.navbar-fixed-top#navbar-banner{:role => "banner"}
       .container
         .navbar-header
           %a.navbar-brand{:href => "/"}
             = icon('home')
             OperaTags
-          %button.navbar-toggle.collapsed{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
+          -#%button.navbar-toggle.collapsed{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
         %nav.navbar-collapse.collapse#navbar-main{:role => "navigation"}
-          %ul.nav.navbar-nav
+          -#%ul.nav.navbar-nav
             %li#groupsTab
               %a{:href => "/groups"}
                 = icon('group')
@@ -34,19 +34,8 @@
               %a{:href => "/users"}
                 = icon('user')
                 People
-
-            -#%li
-              -#%a{:href => "/users"}
-                -#= icon('user')
-                -#Users
-            -#%li
-              -#%a{:href => "/groups"}
-                -#= icon('group')
-            -#    Groups
-          = form_tag users_path, method: 'get', class: 'navbar-form navbar-left' do
+          = form_tag users_path, method: 'get', class: 'navbar-form navbar-right' do
             = text_field_tag :search, params[:search], class: 'form-control col-lg-8', placeholder: 'Search by name'
-          -#%form.navbar-form.navbar-left
-            -#%input.form-control.col-lg-8{:placeholder => "Search By Name", :type => "text"}
           -if user_signed_in?
             %ul.nav.navbar-nav.navbar-right
               %li
@@ -57,12 +46,36 @@
                 %a{href: "#{destroy_user_session_path}", :'data-method' => 'delete'}
                   = icon('sign-out')
                   Logout
+       
+        -#.row
+          -#.col-lg-12
+    .navbar#sub-nav-container
+      .container              
+        .navbar.navbar-default#navbar-sub      
+          .navbar-header
+            %button.navbar-toggle.collapsed{"data-target" => "#navbar-content", "data-toggle" => "collapse", :type => "button"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          .navbar-collapse.navbar-responsive-collapse.collapse#navbar-content
+            %ul.nav.navbar-nav
+              %li#groupsTab
+                %a{:href => "/groups"}
+                  = icon('group')
+                  Business Unit
+              %li#projectsTab
+                %a{:href => "/projects"}
+                  = icon('suitcase')
+                  Projects
+              %li#usersTab
+                %a{:href => "/users"}
+                  = icon('user')
+                  People
               
     %main
       .container
         .row
-          .panel-heading
-            = render partial: "shared/flash_messages", flash: flash 
+          = render partial: "shared/flash_messages", flash: flash 
           - if has_sidebar?
             .col-md-3
               %h4 Filters

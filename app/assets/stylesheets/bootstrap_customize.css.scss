@@ -3,5 +3,72 @@
 }
 
 main {
-    margin-top: 60px;
+    margin-top: 39px;
+}
+
+#navbar-banner {
+  background-color: hsl(210, 57%, 56%);
+}
+
+.navbar-brand {
+  font-style: italic;  
+  font-family: arial black, Gadget, sans-serif;
+  text-shadow: 1px 2px 5px #000;
+  font-size: 35px;  
+  line-height: 1;  
+  color: #ffffff; 
+  margin-top: -10px;
+}
+
+#navbar-sub {
+  //height: 50px;
+  border-radius: 0px;
+  //background-color: hsl(210, 82%, 28%);
+}
+
+#sub-nav-container {
+  top: 60px;
+}
+
+.navbar-default {
+  background-color: hsl(210, 82%, 28%);
+}
+
+.nav.navbar-nav.navbar-right li{
+  //height: 60px;
+}
+
+body {
+  color: hsl(210, 82%, 28%);
+}
+
+#sub-nav-container .navbar {
+  min-height: 50px;
+}
+
+.navbar-brand {
+  //height: 45px;
+}
+
+#sub-nav-container > .container {
+  padding: 0px;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background-color: hsl(0, 100%, 100%);
+  color: hsl(211, 29%, 14%);
+}
+
+
+#navbar-content > .navbar-nav > li > a {
+  padding-top: 15.5px;
+  padding-bottom: 15.5px;
+}
+
+body {
+  background-image: url(http://operasolutions.freeiz.com/images/grid_pattern.jpg);
+  
+}
+.container > .row {
+  background-color: #ffffff; 
 }
