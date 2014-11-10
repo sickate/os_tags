@@ -1,7 +1,14 @@
+:ruby
+  group_param = @group.nil? ? '' : "group_id=#{@group.id}&"
+  project_param = @project.nil? ? '' : "project_id=#{@project.id}&"
+  office_param = @office.nil? ? '' : "office_id=#{@office.id}&"
+  temp_people_page_url = "/users?#{project_param}#{project_param}#{office_param}"
+
 .page-header
   %h4 People
   - @people.each do |person|
-    %a{href: "#{user_url(person)}"}
+    -#%a{href: "#{user_url(person)}"}
+    %a{href: "#{temp_people_page_url}"}
       = person.name
     %br
 
