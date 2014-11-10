@@ -19,10 +19,19 @@ class Project < ActiveRecord::Base
   belongs_to :group
 
   scope :in_office, -> (office) {
-      if office.nil?
-        all
-      else
-        joins('left outer join offices_projects on offices_projects.project_id = projects.id').where('offices_projects.office_id = ?', office.id)
-      end
-    }
+    if office.nil?
+      all
+    else
+      joins('left outer join offices_projects on offices_projects.project_id = projects.id').where('offices_projects.office_id = ?', office.id)
+    end
+  }
+
+  scope :of_group, -> (group) {
+    if group.nil?
+      all
+    else
+      where(group_id: group.id)
+    end
+  }
+
 end

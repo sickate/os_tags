@@ -1,19 +1,38 @@
-%h1 Listing projects
-%table
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Group
-      %th{:colspan => "3"}
-  %tbody
-    - @projects.each do |project|
-      %tr
-        %td= project.name
-        %td= project.description
-        %td= project.group_id
-        %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project)
-        %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Project', new_project_path
+.page-header
+  %h4 People
+  - @people.each do |person|
+    %a{href: "#{user_url(person)}"}
+      = person.name
+    %br
+
+.page-header
+  %h4 Skills
+  .well
+    %h4{:style => "color: #515151;"} Tap skills for details
+    #skillcloud{:style => "height: 400px;"}
+
+:javascript
+  $(function() {
+    var skill_array = JSON.parse('#{@skill_array.to_json}');
+    $("#skillcloud").jQCloud(skill_array);
+  });
+
+-#%h1 Listing projects
+-#%table
+  -#%thead
+    -#%tr
+      -#%th Name
+      -#%th Description
+      -#%th Group
+      -#%th{:colspan => "3"}
+  -#%tbody
+    -#- @projects.each do |project|
+      -#%tr
+        -#%td= project.name
+        -#%td= project.description
+        -#%td= project.group_id
+        -#%td= link_to 'Show', project
+        -#%td= link_to 'Edit', edit_project_path(project)
+        -#%td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+-#%br/
+-#= link_to 'New Project', new_project_path

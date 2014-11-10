@@ -9,7 +9,7 @@
   Business Unit
   .btn-toolbar
     .btn-group{"data-model" => 'group'}
-      %button.btn.btn-default.sidebar-btn#selected #{@group.nil? ? 'All' : @group.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@group_name}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
@@ -24,7 +24,7 @@
   Project
   .btn-toolbar
     .btn-group{"data-model" => 'project'}
-      %button.btn.btn-default.sidebar-btn#selected #{@project.nil? ? 'All' : @project.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@project_name}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
@@ -39,13 +39,13 @@
   Office
   .btn-toolbar
     .btn-group{"data-model" => 'office'}
-      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.location}
+      %button.btn.btn-default.sidebar-btn#selected #{@office_location}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @offices.each do |item|
           %li
-            %a{href: "/users?project_id=#{item.id}&#{project_param}#{group_param}#{role_param}"} #{item.location}
+            %a{href: "/users?office_id=#{item.id}&#{project_param}#{group_param}#{role_param}"} #{item.location}
         %li.divider
         %li
           %a{href: "/users?#{project_param}#{group_param}#{role_param}"} All
@@ -54,7 +54,7 @@
   Role
   .btn-toolbar
     .btn-group{"data-model" => 'role'}
-      %button.btn.btn-default.sidebar-btn#selected #{@role.nil? ? 'All' : @role.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@role_name}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu

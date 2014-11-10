@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :handle_filters, only: [:index]
   before_action :authenticate_user!
 
   # GET /groups
@@ -7,26 +8,33 @@ class GroupsController < ApplicationController
   def index
     #@groups = Group.all
     #group = params[:group_id] ? Group.find(params[:group_id]) : Group.first
-    group_id = Group.first.id
-    redirect_to action: :show, id: group_id
-  end
-
-  # GET /groups/1
-  # GET /groups/1.json
-  def show
     #group_id = params[:id] or params[:group_id]
-    @group = Group.find params[:id]
+    #@group = Group.find params[:id]
     #@group = Group.find group_id
-    @groups = Group.all
-    @offices = @group.offices
-    @office = Office.find(params[:office_id]) unless params[:office_id].nil?
+    #@office = Office.find(params[:office_id]) unless params[:office_id].nil?
 
+    # filters
+    @groups = Group.all
+    @offices = @group.blank? ? Office.all : @group.offices
+
+    #contents
     @people = User.in_office(@office).of_group(@group)
+    @projects = Project.in_office(@office).of_group(@group)
+
     @skill_array = []
     @people.skill_counts.each do |skill_count|
       hash = {:text => skill_count.name, :weight => skill_count.taggings_count, :link => "/tags/#{skill_count.name}"}
       @skill_array.push hash
     end
+
+    #group_id = Group.first.id
+    #redirect_to action: :show, id: group_id
+  end
+
+  # GET /groups/1
+  # GET /groups/1.json
+  def show
+
   end
 
   # GET /groups/new

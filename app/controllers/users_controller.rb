@@ -1,24 +1,27 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :handle_filters, only: [:index]
   before_action :authenticate_user!
-  
+
   # GET /users
   # GET /users.json
   def index
     if params[:search].blank?
       if params[:tag].nil?
         # filter
-        @group = Group.find(params[:group_id]) unless params[:group_id].nil?
-        @project = Project.find(params[:project_id]) unless params[:project_id].nil?
-        @office = Group.find(params[:office_id]) unless params[:office_id].nil?
-        @role = Role.find(params[:role_id]) unless params[:role_id].nil?
+        #@group = Group.find(params[:group_id]) unless params[:group_id].nil?
+        #@project = Project.find(params[:project_id]) unless params[:project_id].nil?
+        #@office = Group.find(params[:office_id]) unless params[:office_id].nil?
+        #@role = Role.find(params[:role_id]) unless params[:role_id].nil?
 
+        # filter
         @groups = Group.all
-        @projects = Project.all
-        @offices = Office.all
+        @projects = Project.of_group(@group)
+        @offices = Office.in_group(@group).on_project(@project)
         @roles = Role.all
 
-        @users = User.of_group(@group).in_office(@office).on_project(@project).of_role(@role)
+        # contents
+        @people = @users = User.of_group(@group).in_office(@office).on_project(@project).of_role(@role)
       else
         @users = User.tagged_with params[:tag]
       end

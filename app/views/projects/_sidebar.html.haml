@@ -7,38 +7,45 @@
   Business Unit
   .btn-toolbar
     .btn-group{"data-model" => 'group'}
-      %button.btn.btn-default.sidebar-btn#selected #{@group.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@group_name}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @groups.each do |item|
           %li
-            %a{href: "/projects/#{@project.id}?group_id=#{item.id}&#{office_param}"} #{item.name}
+            %a{href: "/projects?group_id=#{item.id}&#{project_param}#{office_param}"} #{item.name}
+        %li.divider
+        %li
+          %a{href: "/projects?#{project_param}&#{office_param}"} All
+
 %li.list-group-item
   Project
   .btn-toolbar
     .btn-group{"data-model" => 'project'}
-      %button.btn.btn-default.sidebar-btn#selected #{@project.name}
+      %button.btn.btn-default.sidebar-btn#selected #{@project_name}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @projects.each do |item|
           %li
-            %a{href: "/projects/#{item.id}?#{group_param}#{office_param}"} #{item.name}
+            %a{href: "/projects?project_id=#{item.id}&#{group_param}#{office_param}"} #{item.name}
+        %li.divider
+        %li
+          %a{href: "/projects?#{group_param}&#{office_param}"} All
 
 %li.list-group-item
   Office
   .btn-toolbar
     .btn-group{"data-model" => 'office'}
-      %button.btn.btn-default.sidebar-btn#selected #{@office.nil? ? 'All' : @office.location}
+      %button.btn.btn-default.sidebar-btn#selected #{@office_location}
       %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
         %span.caret
       %ul.dropdown-menu
         - @offices.each do |item|
           %li
             %a #{item.name}
-            %a{href: "/projects/#{@project.id}?#{group_param}&office_id=#{item.id}"} #{item.location}
+            %a{href: "/projects?office_id=#{item.id}&#{project_param}#{group_param}"} #{item.location}
         %li.divider
         %li
-          %a{href: "/projects/#{@project.id}?#{group_param}"} All
+          %a{href: "/projects?#{project_param}&#{group_param}"} All
 

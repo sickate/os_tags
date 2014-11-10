@@ -88,8 +88,8 @@
 :javascript
   $(document).ready(function(){
     var setActiveTab = function(){
-      $('nav li').removeClass('active');
-      $("#" + window.location.href.split("/")[3] + 'Tab').addClass('active');
+      $('.nav li').removeClass('active');
+      $("##{tab_name}" + 'Tab').addClass('active');
       //$("nav li:contains('#{params[:controller].capitalize}')").addClass('active');
     }
     setActiveTab();

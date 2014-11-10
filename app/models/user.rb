@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
   acts_as_taggable_on :skills, :clients, :prospects, :tags
 
   has_and_belongs_to_many :histroy_projects, join_table: "users_projects_histroy", class_name: 'Project'
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     end
   }
 
- scope :of_role, -> (role) {
+  scope :of_role, -> (role) {
     if role.nil?
       all
     else

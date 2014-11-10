@@ -1,6 +1,25 @@
 .page-header
+  %h3 Projects
+  - @projects.each do |project|
+    %a{href: "#{project_url(project)}"}
+      = project.name
+    %br
+
+.page-header
+  %h4 Skills
+  .well
+    %h4{:style => "color: #515151;"} Tap skills for details
+    #skillcloud{:style => "height: 400px;"}
+
+:javascript
+  $(function() {
+    var skill_array = JSON.parse('#{@skill_array.to_json}');
+    $("#skillcloud").jQCloud(skill_array);
+  });
+
+-#.page-header
   %h3 All Groups
-.row
+-#.row
   .col-sm-12
     %table.table
       %thead

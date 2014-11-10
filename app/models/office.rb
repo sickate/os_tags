@@ -18,6 +18,22 @@ class Office < ActiveRecord::Base
 
   belongs_to :city
 
+  scope :in_group, -> (group) {
+    if group.nil?
+      all
+    else
+      joins('left outer join groups_offices on groups_offices.office_id = offices.id').where('groups_offices.group_id = ?', group.id)
+    end
+  }
+
+  scope :on_project, -> (project) {
+    if project.nil?
+      all
+    else
+      joins('left outer join offices_projects on offices_projects.office_id = offices.id').where('offices_projects.project_id = ?', project.id)
+    end
+  }
+
   def self.at_location city_name
     city = City.find_by_name city_name
     find_by(city_id: city.id)

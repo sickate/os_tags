@@ -1,13 +1,24 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :handle_filters, only: [:index]
   before_action :authenticate_user!
-  
+
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
-    project_id = Project.first.id
-    redirect_to action: :show, id: project_id
+    # filters
+    @groups = Group.all
+    @projects = Project.of_group(@group)
+    @offices = Office.in_group(@group).on_project(@project)
+
+    # contents
+    @people = User.in_office(@office).of_group(@group).on_project(@project)
+
+    @skill_array = []
+    @people.skill_counts.each do |skill_count|
+      hash = {:text => skill_count.name, :weight => skill_count.taggings_count, :link => "/tags/#{skill_count.name}"}
+      @skill_array.push hash
+    end
   end
 
   # GET /projects/1
